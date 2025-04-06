@@ -108,3 +108,47 @@ sr.reveal(`.work__filters`, { interval: 400 });
 sr.reveal(`.work__container`, { interval: 400, origin: "bottom" });
 //CONTACT
 sr.reveal(`.contact__container`, { interval: 500 });
+
+/*=============== CERTIFICATE POPUP ===============*/
+// Certificate Popup
+const certificateImgs = document.querySelectorAll('.certificate__img')
+const certificatePopups = document.querySelectorAll('.certificate-popup')
+const popupCloses = document.querySelectorAll('.certificate-popup__close')
+
+// Function to open popup
+const openPopup = (popup) => {
+    popup.classList.add('show-popup')
+}
+
+// Function to close popup
+const closePopup = (popup) => {
+    popup.classList.remove('show-popup')
+}
+
+// Add click events to certificates
+certificateImgs.forEach(img => {
+    img.addEventListener('click', () => {
+        const popupId = img.getAttribute('data-certificate')
+        const popup = document.getElementById(popupId)
+        if (popup) {
+            openPopup(popup)
+        }
+    })
+})
+
+// Add click events to close buttons
+popupCloses.forEach(close => {
+    close.addEventListener('click', () => {
+        const popup = close.closest('.certificate-popup')
+        closePopup(popup)
+    })
+})
+
+// Close popup when clicking outside
+certificatePopups.forEach(popup => {
+    popup.addEventListener('click', (e) => {
+        if (e.target === popup) {
+            closePopup(popup)
+        }
+    })
+})
